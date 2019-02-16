@@ -188,6 +188,8 @@ namespace STANC
             string hbInbox = newInbox();
             hbSubscription = nc.SubscribeAsync(hbInbox, processHeartBeat);
 
+            // TODO: Setup heartbeat monitor timer here.
+
             string discoverSubject = opts.discoverPrefix + "." + stanClusterID;
 
             ConnectRequest req = new ConnectRequest();
