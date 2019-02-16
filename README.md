@@ -15,7 +15,7 @@ natsConnectionOptions.ServerHeartbeatTimeoutCallback = () =>
 {
     // Handle connection issues here
 };
-natsConnectionOptions.ServerHeartbeatTimeoutMillis = 10000; // Alert after 10 seconds of silence
+natsConnectionOptions.ServerHeartbeatTimeoutMillis = 10000; // Invoke callback after 10 seconds of silence
 
 var cf = new StanConnectionFactory();
 using (var c = cf.CreateConnection("test-cluster", "appname"))
