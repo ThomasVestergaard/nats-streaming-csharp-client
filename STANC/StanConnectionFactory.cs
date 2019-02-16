@@ -18,6 +18,8 @@ namespace STANC
     /// </summary>
     public sealed class StanConnectionFactory
     {
+
+
         /// <summary>
         /// Creates a connection to the server.
         /// </summary>
@@ -40,5 +42,7 @@ namespace STANC
         {
             return new Connection(clusterID, clientID, null);
         }
+
+        
     }
 }

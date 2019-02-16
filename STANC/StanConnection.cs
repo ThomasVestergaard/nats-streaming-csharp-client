@@ -150,6 +150,7 @@ namespace STANC
         internal ProtocolSerializer ps = new ProtocolSerializer();
 
         private StanOptions opts = null;
+        private DateTimeOffset lastReceivedHeartbeat = DateTimeOffset.UtcNow;
 
         private IConnection nc;
         private bool ncOwned = false;
@@ -247,7 +248,11 @@ namespace STANC
             }
 
             if (lnc != null)
+            {
                 lnc.Publish(args.Message.Reply, null);
+                lastReceivedHeartbeat = DateTimeOffset.UtcNow;
+                
+            }
         }
 
         internal PublishAck removeAck(string guid)

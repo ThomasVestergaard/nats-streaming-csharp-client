@@ -27,6 +27,9 @@ namespace STANC
         internal long ackTimeout = StanConsts.DefaultConnectWait;
         internal string discoverPrefix = StanConsts.DefaultDiscoverPrefix;
         internal long maxPubAcksInflight = StanConsts.DefaultMaxPubAcksInflight;
+        internal int serverHeartbeatTimeoutSeconds; // Number of seconds to wait for a server heartbeat, before invoking serverHeartbeatCallback
+        internal Action serverHeartbeatTimeoutCallback;
+
 
         internal StanOptions() { }
 
