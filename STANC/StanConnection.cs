@@ -150,7 +150,7 @@ namespace STANC
         internal ProtocolSerializer ps = new ProtocolSerializer();
 
         private StanOptions opts = null;
-        private DateTimeOffset lastReceivedHeartbeat = DateTimeOffset.UtcNow;
+        private ServerHeartbeatMonitor heartbeatMonitor;
 
         private IConnection nc;
         private bool ncOwned = false;
@@ -187,7 +187,7 @@ namespace STANC
             // create a heartbeat inbox
             string hbInbox = newInbox();
             hbSubscription = nc.SubscribeAsync(hbInbox, processHeartBeat);
-
+            
             string discoverSubject = opts.discoverPrefix + "." + stanClusterID;
 
             ConnectRequest req = new ConnectRequest();
@@ -236,6 +236,16 @@ namespace STANC
             ackSubscription.SetPendingLimits(1024 * 1024, 32 * 1024 * 1024);
 
             pubAckMap = new BlockingDictionary<string, PublishAck>(opts.maxPubAcksInflight);
+
+            // Setup server heartbeat monitor
+            if (options != null && options.ServerHeartbeatTimeoutMillis > 0)
+            {
+                heartbeatMonitor = new ServerHeartbeatMonitor(1000, options.ServerHeartbeatTimeoutMillis, () =>
+                {
+                    options.ServerHeartbeatTimeoutCallback?.Invoke();
+                });
+                heartbeatMonitor.Start();
+            }
         }
 
         private void processHeartBeat(object sender, MsgHandlerEventArgs args)
@@ -250,7 +260,9 @@ namespace STANC
             if (lnc != null)
             {
                 lnc.Publish(args.Message.Reply, null);
-                lastReceivedHeartbeat = DateTimeOffset.UtcNow;
+                
+                if (heartbeatMonitor != null)
+                    heartbeatMonitor.RegisterHeartbeat();
                 
             }
         }
@@ -530,6 +542,9 @@ namespace STANC
                     hbSubscription.Unsubscribe();
                     hbSubscription = null;
                 }
+
+                if (heartbeatMonitor != null)
+                    heartbeatMonitor.Stop();
 
                 CloseRequest req = new CloseRequest();
                 req.ClientID = this.clientID;

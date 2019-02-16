@@ -27,7 +27,7 @@ namespace STANC
         internal long ackTimeout = StanConsts.DefaultConnectWait;
         internal string discoverPrefix = StanConsts.DefaultDiscoverPrefix;
         internal long maxPubAcksInflight = StanConsts.DefaultMaxPubAcksInflight;
-        internal int serverHeartbeatTimeoutSeconds; // Number of seconds to wait for a server heartbeat, before invoking serverHeartbeatCallback
+        internal int serverHeartbeatTimeoutMillis = -1; // Number of millis to wait for a server heartbeat, before invoking serverHeartbeatCallback
         internal Action serverHeartbeatTimeoutCallback;
 
 
@@ -50,6 +50,28 @@ namespace STANC
             DiscoverPrefix = DeepCopy(options.DiscoverPrefix);
             MaxPubAcksInFlight = options.MaxPubAcksInFlight;
             NatsConn = options.natsConn;
+        }
+
+        /// <summary>
+        /// Number of millis to wait for a server heartbeat, before invoking serverHeartbeatCallback
+        /// </summary>
+        public int ServerHeartbeatTimeoutMillis
+        {
+            get
+            {
+                return serverHeartbeatTimeoutMillis;
+
+            }
+            set { serverHeartbeatTimeoutMillis = value; }
+        }
+
+        /// <summary>
+        /// Callback which is invoked when not receiving heartbeats from the server for the amount of millis specified in ServerHeartbeatTimeoutMillis
+        /// </summary>
+        public Action ServerHeartbeatTimeoutCallback
+        {
+            get { return serverHeartbeatTimeoutCallback; }
+            set { serverHeartbeatTimeoutCallback = value; }
         }
 
         /// <summary>

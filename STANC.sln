@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "STANC.UnitTests", "STANC.Un
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "STANC", "STANC\STANC.csproj", "{4ADB452B-C61A-41FA-817C-A7033B6DCC50}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "STANC-subsriber", "STANC-subsriber\STANC-subsriber.csproj", "{B7DF2CFB-792F-44E7-9951-E581A889C6C0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{4ADB452B-C61A-41FA-817C-A7033B6DCC50}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4ADB452B-C61A-41FA-817C-A7033B6DCC50}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4ADB452B-C61A-41FA-817C-A7033B6DCC50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7DF2CFB-792F-44E7-9951-E581A889C6C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7DF2CFB-792F-44E7-9951-E581A889C6C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7DF2CFB-792F-44E7-9951-E581A889C6C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7DF2CFB-792F-44E7-9951-E581A889C6C0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
