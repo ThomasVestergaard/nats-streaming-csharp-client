@@ -1,8 +1,7 @@
 # NATS .NET C# Streaming Client
-This repository was originally copied from the official nats-streaming C# client repo here: https://github.com/nats-io/csharp-nats-streaming
-This repo was made because I needed to add stuff and there was no activity on the official project. Use this code at your own risk.
+This repository was originally copied from the official nats-streaming C# client repo here: https://github.com/nats-io/csharp-nats-streaming as per commit id #b33cc19651e945ae6a6757dbeebcc411e05d3859.
 
-NATS Streaming is an extremely performant, lightweight reliable streaming platform powered by [NATS](https://nats.io).
+This repo was made because I needed to add stuff and there was no activity on the official project. Use this code at your own risk.
 
 [![License Apache 2.0](https://img.shields.io/badge/License-Apache2-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 
